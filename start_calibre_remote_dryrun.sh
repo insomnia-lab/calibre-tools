@@ -2,13 +2,14 @@
 server_ip="erficca.lan"
 remote_user="calibre"
 remote_path="/home/calibre/propirata"
-temp_path='~/temp_calibre_library'
+#remote_path="/home/calibre/test_script"
+temp_path="~/temp_calibre_library"
 
 eval temp_path=$temp_path
 
 #umount path
-function _umount { 
-	umount $temp_path &> /dev/null
+function _umount {
+	fusermount -uz $temp_path &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "failed umounting $temp_path"	
 	fi
@@ -16,16 +17,11 @@ function _umount {
 
 #remove temp folder
 function _remove {
-	mount | grep $temp_path &> /dev/null
+	mount | grep " $temp_path "  &> /dev/null
 	if [ $? -ne 0 ]; then
 		rm -R $temp_path &> /dev/null	
 	fi
 }
-
-#clean previous run
-umount $temp_path &> /dev/null
-_remove
-
 
 #test sshfs installation
 which sshfs &> /dev/null
@@ -42,7 +38,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #create directory
-mkdir $temp_path &> /dev/null
+mkdir -p $temp_path &> /dev/null
 if [ $? -ne 0 ]; then
 	echo "failed to create $temp_path"
 	exit 4
@@ -62,7 +58,6 @@ if [ $? -ne 0 ]; then
 	echo "failed to start calibre"
 	exit 6
 fi
-
 
 _umount
 

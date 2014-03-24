@@ -8,7 +8,7 @@ eval temp_path=$temp_path
 
 #umount path
 function _umount { 
-	umount $temp_path &> /dev/null
+	fusermount -uz $temp_path &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "failed umounting $temp_path"	
 	fi
@@ -21,10 +21,6 @@ function _remove {
 		rm -R $temp_path &> /dev/null	
 	fi
 }
-
-#clean previous run
-umount $temp_path &> /dev/null
-_remove
 
 
 #test sshfs installation
