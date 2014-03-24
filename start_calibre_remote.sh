@@ -6,6 +6,16 @@ temp_path='~/temp_calibre_library'
 
 eval temp_path=$temp_path
 
+#signal handling
+trap \
+"echo 'intercepted signal: closing...';\
+_umount;\
+_remove;\
+exit 1" SIGHUP SIGINT SIGTERM
+
+#signal handling
+trap "_umount;_remove;" SIGHUP SIGINT SIGTERM
+
 #umount path
 function _umount { 
 	fusermount -uz $temp_path &> /dev/null
