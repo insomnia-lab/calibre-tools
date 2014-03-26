@@ -13,8 +13,6 @@ _umount;\
 _remove;\
 exit 1" SIGHUP SIGINT SIGTERM
 
-#signal handling
-trap "_umount;_remove;" SIGHUP SIGINT SIGTERM
 
 #umount path
 function _umount { 
