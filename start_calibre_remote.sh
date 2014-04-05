@@ -1,8 +1,12 @@
 #!/bin/bash
-server_ip="erficca.lan"
-remote_user="calibre"
-remote_path="/home/calibre/propirata"
+
+server_ip='erficca.lan'
+remote_user='calibre'
+remote_path='/home/calibre/propirata'
+remote_port=22
 temp_path='~/temp_calibre_library'
+
+### DO NOT MODIFY UNDER THIS LINE ###
 
 eval temp_path=$temp_path
 
@@ -60,7 +64,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #mount remote hdd
-sshfs $remote_user@$server_ip:$remote_path $temp_path
+sshfs -p $remote_port $remote_user@$server_ip:$remote_path $temp_path
 if [ $? -ne 0 ]; then
 	echo "failed on sshfs"
 	exit 5
