@@ -17,7 +17,7 @@ echo -e "---- Run of $date_string ----\n" > $log_file
 # copy remote archive in $local_path 
 
 echo -e "\n#### Rsync log ####\n" >> $log_file
-rsync -rzh $remote_user@$remote_host:$remote_port$remote_path  $local_path &>> $log_file
+rsync -rzh --rsh="ssh -p $remote_port" $remote_user@$remote_host:$remote_path  $local_path &>> $log_file
 
 # generate compressed archive
 echo -e "\n#### Tar log ####\n" >> $log_file
