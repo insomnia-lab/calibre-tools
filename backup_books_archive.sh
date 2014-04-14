@@ -3,8 +3,9 @@
 remote_user=calibre
 remote_host=erficca.ins
 remote_port=22
-remote_path=/home/calibre/propirata
-local_path=/media/tera/backup/propirata
+remote_path=/home/calibre/propirata/
+local_path=/media/tera/backup/propirata/
+tar_dest=/media/tera/backup/
 log_file=/media/tera/backup/propirata_archive.log
 email=
 
@@ -21,7 +22,7 @@ rsync -rzh --rsh="ssh -p $remote_port" $remote_user@$remote_host:$remote_path  $
 
 # generate compressed archive
 echo -e "\n#### Tar log ####\n" >> $log_file
-tar -zcf "$local_path"_"$date_string".tar.gz $local_path &>> $log_file
+tar -zcf "$tar_dest"propirata_"$date_string".tar.gz $local_path &>> $log_file
 
 # send email
 
