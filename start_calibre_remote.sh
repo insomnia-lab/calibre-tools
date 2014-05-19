@@ -6,6 +6,9 @@ remote_path='/home/calibre/propirata'
 remote_port=22
 temp_path='~/temp_calibre_library'
 
+
+
+
 ### DO NOT MODIFY UNDER THIS LINE ###
 
 eval temp_path=$temp_path
@@ -50,7 +53,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #test if server is reachable
-ping -W 3 -c 1 erficca.lan &> /dev/null
+ping -W 3 -c 1 $server_ip &> /dev/null
 if [ $? -ne 0 ]; then
 	echo "server it's not reachable on \"$server_ip\""
 	exit 3
